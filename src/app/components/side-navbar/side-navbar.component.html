@@ -1,0 +1,42 @@
+<nav id="sidebar" [ngClass]="{ active: !isCollapsed }">
+  <div class="sidebar-header" (click)="isCollapsed = !isCollapsed">
+    <div id="menuSwitcher">
+      <span><i class="fa fa-bars menu-switcher-icon"></i></span>
+    </div>
+  </div>
+
+  <ul class="list-unstyled components">
+    <li>
+      <a href="#">
+        DashBoard
+      </a>
+    </li>
+    <li>
+      <a
+        href="#homeSubmenu"
+        data-toggle="collapse"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        [ngClass]="{ 'collapse': homeCollapse, 'active': true }"
+        (click)="homeCollapse = !homeCollapse"
+      >
+        Transport Orders
+      </a>
+      <ul
+        class="collapse list-unstyled"
+        [ngClass]="{ show: !homeCollapse }"
+        id="homeSubmenu"
+      >
+        <li>
+          <a href="#">Unassigned Orders</a>
+        </li>
+        <li>
+          <a href="#">Assigned Orders</a>
+        </li>
+        <li>
+          <a href="#">Rejected orders</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
