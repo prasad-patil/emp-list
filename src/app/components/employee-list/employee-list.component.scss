@@ -1,6 +1,3 @@
-.example-container {
-   overflow: auto;
-}
 .header-filter {
   width: 90%;
 }
@@ -15,11 +12,13 @@
 
 table {
   width: 100%;
-}
-tbody,
-thead {
+  max-height: 500px;
   overflow: auto;
 }
+// tbody,
+// thead {
+//   overflow: auto;
+// }
 .mat-column-select {
   width: 30px !important;
 }
@@ -52,7 +51,6 @@ td:nth-child(4) {
 }
 .mat-cell {
   text-overflow: ellipsis;
-  overflow: hidden;
 }
 label {
   margin-bottom: unset !important;

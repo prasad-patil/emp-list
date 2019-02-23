@@ -1,5 +1,5 @@
 <nav id="sidebar" [ngClass]="{ active: !isCollapsed }">
-  <div class="sidebar-header" (click)="isCollapsed = !isCollapsed">
+  <div class="sidebar-header" (click)="isCollapsed = !isCollapsed; homeCollapse = true">
     <div id="menuSwitcher">
       <span><i class="fa fa-arrow-right menu-switcher-icon"></i></span>
     </div>
@@ -8,7 +8,8 @@
   <ul class="list-unstyled components">
     <li>
       <a href="#">
-        DashBoard
+        <i class="fa fa-home"></i>
+        <span *ngIf="isCollapsed">Home</span>
       </a>
     </li>
     <li>
@@ -17,10 +18,11 @@
         data-toggle="collapse"
         aria-expanded="false"
         class="dropdown-toggle"
-        [ngClass]="{ 'collapse': homeCollapse, 'active': true }"
+        [ngClass]="{ collapse: homeCollapse, active: true }"
         (click)="homeCollapse = !homeCollapse"
       >
-        Transport Orders
+        <i class="fa fa-truck"></i>
+        <span *ngIf="isCollapsed">Transport Orders</span>
       </a>
       <ul
         class="collapse list-unstyled"

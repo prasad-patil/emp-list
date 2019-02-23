@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { EmployeeService } from './services/employee.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +24,8 @@ import { SideNavbarComponent } from './components/side-navbar/side-navbar.compon
     OwlNativeDateTimeModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NgScrollbarModule
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

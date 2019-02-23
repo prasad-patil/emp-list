@@ -7,7 +7,11 @@ import {
   MatInputModule,
   MatSortModule,
   MatCheckboxModule,
-  MatIconModule
+  MatIconModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatButtonModule,
+  MatSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -20,7 +24,11 @@ import {
     MatInputModule,
     MatSortModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatSelectModule
   ],
   exports: [
     MatTableModule,
@@ -29,7 +37,11 @@ import {
     MatInputModule,
     MatSortModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatSelectModule
   ]
 })
 export class CustomMatModuleModule {}

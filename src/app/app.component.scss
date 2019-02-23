@@ -36,7 +36,6 @@ span {
   display: inline-block;
 }
 
-
 .app {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -55,7 +54,6 @@ span {
   height: 100%;
   min-width: 250px;
 }
-
 
 // .wrapper {
 //   box-sizing: border-box;
@@ -125,5 +123,35 @@ span {
   width: calc(100% - 80px);
   height: 100%;
   right: 0;
-  overflow: auto;
+  overflow: scroll;
 }
+* {
+  height: 100%;
+  width: 100%;
+
+}
+
+
+// .example-icon {
+//   padding: 0 14px;
+// }
+
+// .date-center {
+//   margin: 0 auto;
+//   .date-div {
+//     display: inline-flex;
+//     .date {
+//       font-size: 30px;
+//       margin: 10px;
+//     }
+//     .month-year {
+//       font-size: 15px;
+//       line-height: 25px;
+//     }
+//   }
+// }
+
+// .mat-menu-content:not(:empty) {
+//   padding-top: unset;
+//   padding-bottom: unset;
+// }

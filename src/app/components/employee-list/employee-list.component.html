@@ -1,3 +1,6 @@
+<h1>
+  Hi Tere
+</h1>
 <div class="example-container mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="select" sticky>
@@ -33,7 +36,7 @@
 
     <ng-container matColumnDef="uid" sticky>
       <th mat-header-cell *matHeaderCellDef mat-sort-header>UID</th>
-      <td mat-cell *matCellDef="let row">{{ row.uid }}%</td>
+      <td mat-cell *matCellDef="let row">{{ row.uid }}</td>
     </ng-container>
 
     <ng-container matColumnDef="istrusted">
@@ -104,7 +107,7 @@
         Delivery Date
       </th>
       <td mat-cell *matCellDef="let row">
-        {{ row.deliveryDate }}
+        {{ row.deliveryDate | date: 'dd/MM/yy hh:mm' }}
       </td>
     </ng-container>
 
@@ -210,18 +213,40 @@
             [owlDateTimeTrigger]="dtRange2"
             [owlDateTime]="dtRange2"
             [(ngModel)]="deliveryFilterRange"
+            #dateRangeRef
+            (change)="onDeliverydateFilterChanges(dateRangeRef)"
           />
+          <mat-icon
+            matSuffix
+            svgIcon="cancel"
+            *ngIf="
+              deliveryFilterRange?.length > 0 &&
+              (deliveryFilterRange[0] !== null ||
+                deliveryFilterRange[1] !== null)
+            "
+            (click)="onDeliveryDateClear(dateRangeRef)"
+          ></mat-icon>
         </mat-form-field>
         <owl-date-time
           [pickerType]="'calendar'"
           pickerMode="dialog"
           #dtRange2
+          (afterPickerClosed)="onDeliveryDatePickerClosed($event)"
         ></owl-date-time>
       </th>
     </ng-container>
 
     <ng-container matColumnDef="hobby-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-form-field class="header-filter">
+          <mat-select [formControl]="hobbyFilter">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let hobby of hobbyList" [value]="hobby.value">
+              {{ hobby.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </th>
     </ng-container>
 
     <tr

@@ -36,10 +36,11 @@ export class EmployeeListComponent implements OnInit {
     'hobby'
   ];
 
-  selection = new SelectionModel<Employee[]>(true, []);
+  selection = new SelectionModel<Employee>(true, []);
 
   idFilter = new FormControl();
   uidFilter = new FormControl();
+  hobbyFilter = new FormControl();
 
   pickUpFilterRange: Date[];
   deliveryFilterRange: Date[];
@@ -67,6 +68,12 @@ export class EmployeeListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  hobbyList: Hobby[] = [
+    { value: 'cricket', viewValue: 'Cricket' },
+    { value: 'football', viewValue: 'Football' },
+    { value: 'tennis', viewValue: 'Tennis' }
+  ];
 
   constructor(
     private empService: EmployeeService,
@@ -97,6 +104,12 @@ export class EmployeeListComponent implements OnInit {
         'assets/svgs/baseline-search-24px.svg'
       )
     );
+    iconRegistry.addSvgIcon(
+      'cancel',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svgs/baseline-cancel-24px.svg'
+      )
+    );
   }
 
   ngOnInit() {
@@ -118,23 +131,48 @@ export class EmployeeListComponent implements OnInit {
       this.filteredValues['uid'] = nameFilterValue;
       this.dataSource.filter = JSON.stringify(this.filteredValues);
     });
+
+    this.hobbyFilter.valueChanges.subscribe(hobbyFilterValue => {
+      this.filteredValues['hobby'] = hobbyFilterValue || '';
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    });
   }
 
   customFilterPredicate() {
     const myFilterPredicate = (data: Employee, filter: string): boolean => {
       const searchString = JSON.parse(filter);
       return (
-        data.id
+        (data.id || '')
           .toString()
           .trim()
           .indexOf(searchString.id) !== -1 &&
-        data.uid
+        (data.uid || '')
           .toString()
           .trim()
           .toLowerCase()
-          .indexOf(searchString.uid) !== -1
+          .indexOf(searchString.uid) !== -1 &&
+        data.hobby
+          .toString()
+          .trim()
+          .toLowerCase()
+          .indexOf(searchString.hobby) !== -1 &&
+        filterDate(searchString.deliveryDate, data.deliveryDate)
       );
     };
+    function filterDate(dateRange, dateToFilter) {
+      if (dateRange === '') {
+        return true;
+      }
+
+      const dates = dateRange.split(',');
+      if (
+        dateToFilter > new Date(dates[0]) &&
+        dateToFilter < new Date(dates[1])
+      ) {
+        return true;
+      }
+      return false;
+    }
     return myFilterPredicate;
   }
 
@@ -151,10 +189,34 @@ export class EmployeeListComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    // this.isAllSelected()
-    //   ? this.selection.clear()
-    //   : this.dataSource.data.forEach((row) =>
-    //       this.selection.select(row)
-    //     );
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach(row => this.selection.select(row));
   }
+  onDeliveryDatePickerClosed(e) {
+    const dateRange = `${this.deliveryFilterRange[0].toISOString()},${this.deliveryFilterRange[1].toISOString()}`;
+    this.filteredValues['deliveryDate'] = dateRange;
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+  }
+  onDeliverydateFilterChanges(e) {
+    if (
+      this.deliveryFilterRange[0] === null ||
+      this.deliveryFilterRange[1] === null
+    ) {
+      this.filteredValues['deliveryDate'] = '';
+      this.dataSource.filter = JSON.stringify(this.filteredValues);
+    }
+  }
+  onDeliveryDateClear(e) {
+    this.deliveryFilterRange[0] = null;
+    this.deliveryFilterRange[1] = null;
+    e.value = '';
+    this.filteredValues['deliveryDate'] = '';
+    this.dataSource.filter = JSON.stringify(this.filteredValues);
+  }
+}
+
+export interface Hobby {
+  value: string;
+  viewValue: string;
 }
