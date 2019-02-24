@@ -1,288 +1,290 @@
 <h1>
   Hi Tere
 </h1>
-<div class="example-container mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="select" sticky>
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox
-          (change)="$event ? masterToggle() : null"
-          [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()"
-        >
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox
-          (click)="$event.stopPropagation()"
-          (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)"
-        >
-        </mat-checkbox>
-      </td>
-    </ng-container>
+<div class="list-wrapper">
+  <div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="select" sticky>
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? masterToggle() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="info" sticky>
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row">
-        <mat-icon svgIcon="remove_red_eye"></mat-icon>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="info" sticky>
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <mat-icon svgIcon="remove_red_eye"></mat-icon>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="id" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-    </ng-container>
+      <ng-container matColumnDef="id" sticky>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="uid" sticky>
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>UID</th>
-      <td mat-cell *matCellDef="let row">{{ row.uid }}</td>
-    </ng-container>
+      <ng-container matColumnDef="uid" sticky>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>UID</th>
+        <td mat-cell *matCellDef="let row">{{ row.uid }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="istrusted">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Is Trusted</th>
-      <td mat-cell *matCellDef="let row">
-        <div *ngIf="row.istrusted">
-          <mat-icon svgIcon="verified_user"></mat-icon>
-        </div>
-        <div *ngIf="!row.istrusted">
-          <mat-icon svgIcon="highlight_off"></mat-icon>
-        </div>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="istrusted">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Is Trusted</th>
+        <td mat-cell *matCellDef="let row">
+          <div *ngIf="row.istrusted">
+            <mat-icon svgIcon="verified_user"></mat-icon>
+          </div>
+          <div *ngIf="!row.istrusted">
+            <mat-icon svgIcon="highlight_off"></mat-icon>
+          </div>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
-    </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
-      <td mat-cell *matCellDef="let row">{{ row.lastName }}</td>
-    </ng-container>
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last name</th>
+        <td mat-cell *matCellDef="let row">{{ row.lastName }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
-      <td mat-cell *matCellDef="let row">{{ row.position }}</td>
-    </ng-container>
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+        <td mat-cell *matCellDef="let row">{{ row.position }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="office">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Office</th>
-      <td mat-cell *matCellDef="let row">{{ row.office }}</td>
-    </ng-container>
+      <ng-container matColumnDef="office">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Office</th>
+        <td mat-cell *matCellDef="let row">{{ row.office }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="salary">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary</th>
-      <td mat-cell *matCellDef="let row">{{ row.salary }}</td>
-    </ng-container>
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary</th>
+        <td mat-cell *matCellDef="let row">{{ row.salary }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="favColor">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fav. Color</th>
-      <td mat-cell *matCellDef="let row" [style.color]="row.favColor">
-        {{ row.favColor }}
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="favColor">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fav. Color</th>
+        <td mat-cell *matCellDef="let row" [style.color]="row.favColor">
+          {{ row.favColor }}
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
-      <td mat-cell *matCellDef="let row">{{ row.city }}</td>
-    </ng-container>
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+        <td mat-cell *matCellDef="let row">{{ row.city }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="favBook">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>favBook</th>
-      <td mat-cell *matCellDef="let row">{{ row.favBook }}</td>
-    </ng-container>
+      <ng-container matColumnDef="favBook">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>favBook</th>
+        <td mat-cell *matCellDef="let row">{{ row.favBook }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="pickUpDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Pick Date
-      </th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.pickUpDate | date: 'dd/MM/yy hh:mm' }}
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="pickUpDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Pick Date
+        </th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.pickUpDate | date: 'dd/MM/yy hh:mm' }}
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="deliveryDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Delivery Date
-      </th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.deliveryDate | date: 'dd/MM/yy hh:mm' }}
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="deliveryDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Delivery Date
+        </th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.deliveryDate | date: 'dd/MM/yy hh:mm' }}
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="hobby">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Hobby</th>
-      <td mat-cell *matCellDef="let row">{{ row.hobby }}</td>
-    </ng-container>
+      <ng-container matColumnDef="hobby">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Hobby</th>
+        <td mat-cell *matCellDef="let row">{{ row.hobby }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="select-subheader" sticky>
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
+      <ng-container matColumnDef="select-subheader" sticky>
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
 
-    <ng-container matColumnDef="info-subheader" sticky>
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
+      <ng-container matColumnDef="info-subheader" sticky>
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
 
-    <ng-container matColumnDef="id-subheader" sticky>
-      <th mat-header-cell *matHeaderCellDef>
-        <div>
+      <ng-container matColumnDef="id-subheader" sticky>
+        <th mat-header-cell *matHeaderCellDef>
+          <div>
+            <mat-form-field class="header-filter">
+              <mat-icon svgIcon="search" matPrefix></mat-icon>
+
+              <input matInput class="form-field" [formControl]="idFilter" />
+            </mat-form-field>
+          </div>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="uid-subheader" sticky>
+        <th mat-header-cell *matHeaderCellDef>
+          <div>
+            <mat-form-field class="header-filter">
+              <mat-icon svgIcon="search" matPrefix></mat-icon>
+              <input matInput class="form-field" [formControl]="uidFilter" />
+            </mat-form-field>
+          </div>
+        </th>
+      </ng-container>
+
+      <ng-container matColumnDef="istrusted-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="name-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="position-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="office-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="salary-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="favColor-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="city-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="favBook-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="pickUpDate-subheader">
+        <th mat-header-cell *matHeaderCellDef>
           <mat-form-field class="header-filter">
-            <mat-icon svgIcon="search" matPrefix></mat-icon>
-
-            <input matInput class="form-field" [formControl]="idFilter" />
+            <input
+              matInput
+              placeholder="Date Time Range:"
+              [selectMode]="'range'"
+              [owlDateTimeTrigger]="dtRange1"
+              [owlDateTime]="dtRange1"
+              [(ngModel)]="pickUpFilterRange"
+            />
           </mat-form-field>
-        </div>
-      </th>
-    </ng-container>
+          <owl-date-time
+            [pickerType]="'calendar'"
+            pickerMode="dialog"
+            #dtRange1
+          ></owl-date-time>
+        </th>
+      </ng-container>
 
-    <ng-container matColumnDef="uid-subheader" sticky>
-      <th mat-header-cell *matHeaderCellDef>
-        <div>
+      <ng-container matColumnDef="deliveryDate-subheader">
+        <th mat-header-cell *matHeaderCellDef>
           <mat-form-field class="header-filter">
-            <mat-icon svgIcon="search" matPrefix></mat-icon>
-            <input matInput class="form-field" [formControl]="uidFilter" />
+            <input
+              matInput
+              placeholder="Date Time Range:"
+              [selectMode]="'range'"
+              [owlDateTimeTrigger]="dtRange2"
+              [owlDateTime]="dtRange2"
+              [(ngModel)]="deliveryFilterRange"
+              #dateRangeRef
+              (change)="onDeliverydateFilterChanges(dateRangeRef)"
+            />
+            <mat-icon
+              matSuffix
+              svgIcon="cancel"
+              *ngIf="
+                deliveryFilterRange?.length > 0 &&
+                (deliveryFilterRange[0] !== null ||
+                  deliveryFilterRange[1] !== null)
+              "
+              (click)="onDeliveryDateClear(dateRangeRef)"
+            ></mat-icon>
           </mat-form-field>
-        </div>
-      </th>
-    </ng-container>
+          <owl-date-time
+            [pickerType]="'calendar'"
+            pickerMode="dialog"
+            #dtRange2
+            (afterPickerClosed)="onDeliveryDatePickerClosed($event)"
+          ></owl-date-time>
+        </th>
+      </ng-container>
 
-    <ng-container matColumnDef="istrusted-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
+      <ng-container matColumnDef="hobby-subheader">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field class="header-filter">
+            <mat-select [formControl]="hobbyFilter">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let hobby of hobbyList" [value]="hobby.value">
+                {{ hobby.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </th>
+      </ng-container>
 
-    <ng-container matColumnDef="name-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="example-first-header-row"
+      ></tr>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="[
+          'select-subheader',
+          'info-subheader',
+          'id-subheader',
+          'uid-subheader',
+          'istrusted-subheader',
+          'name-subheader',
+          'lastName-subheader',
+          'position-subheader',
+          'office-subheader',
+          'salary-subheader',
+          'favColor-subheader',
+          'city-subheader',
+          'favBook-subheader',
+          'pickUpDate-subheader',
+          'deliveryDate-subheader',
+          'hobby-subheader'
+        ]"
+        class="example-second-header-row"
+      ></tr>
 
-    <ng-container matColumnDef="lastName-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="position-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="office-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="salary-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="favColor-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="city-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="favBook-subheader">
-      <th mat-header-cell *matHeaderCellDef></th>
-    </ng-container>
-
-    <ng-container matColumnDef="pickUpDate-subheader">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field class="header-filter">
-          <input
-            matInput
-            placeholder="Date Time Range:"
-            [selectMode]="'range'"
-            [owlDateTimeTrigger]="dtRange1"
-            [owlDateTime]="dtRange1"
-            [(ngModel)]="pickUpFilterRange"
-          />
-        </mat-form-field>
-        <owl-date-time
-          [pickerType]="'calendar'"
-          pickerMode="dialog"
-          #dtRange1
-        ></owl-date-time>
-      </th>
-    </ng-container>
-
-    <ng-container matColumnDef="deliveryDate-subheader">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field class="header-filter">
-          <input
-            matInput
-            placeholder="Date Time Range:"
-            [selectMode]="'range'"
-            [owlDateTimeTrigger]="dtRange2"
-            [owlDateTime]="dtRange2"
-            [(ngModel)]="deliveryFilterRange"
-            #dateRangeRef
-            (change)="onDeliverydateFilterChanges(dateRangeRef)"
-          />
-          <mat-icon
-            matSuffix
-            svgIcon="cancel"
-            *ngIf="
-              deliveryFilterRange?.length > 0 &&
-              (deliveryFilterRange[0] !== null ||
-                deliveryFilterRange[1] !== null)
-            "
-            (click)="onDeliveryDateClear(dateRangeRef)"
-          ></mat-icon>
-        </mat-form-field>
-        <owl-date-time
-          [pickerType]="'calendar'"
-          pickerMode="dialog"
-          #dtRange2
-          (afterPickerClosed)="onDeliveryDatePickerClosed($event)"
-        ></owl-date-time>
-      </th>
-    </ng-container>
-
-    <ng-container matColumnDef="hobby-subheader">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-form-field class="header-filter">
-          <mat-select [formControl]="hobbyFilter">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let hobby of hobbyList" [value]="hobby.value">
-              {{ hobby.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </th>
-    </ng-container>
-
-    <tr
-      mat-header-row
-      *matHeaderRowDef="displayedColumns"
-      class="example-first-header-row"
-    ></tr>
-    <tr
-      mat-header-row
-      *matHeaderRowDef="[
-        'select-subheader',
-        'info-subheader',
-        'id-subheader',
-        'uid-subheader',
-        'istrusted-subheader',
-        'name-subheader',
-        'lastName-subheader',
-        'position-subheader',
-        'office-subheader',
-        'salary-subheader',
-        'favColor-subheader',
-        'city-subheader',
-        'favBook-subheader',
-        'pickUpDate-subheader',
-        'deliveryDate-subheader',
-        'hobby-subheader'
-      ]"
-      class="example-second-header-row"
-    ></tr>
-
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      (click)="selection.toggle(row)"
-    ></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="selection.toggle(row)"
+      ></tr>
+    </table>
+  </div>
 </div>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>

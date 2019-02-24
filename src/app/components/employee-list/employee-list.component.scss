@@ -1,3 +1,6 @@
+.list-wrapper {
+  height: calc(100% - 120px);
+}
 .header-filter {
   width: 90%;
 }
@@ -9,11 +12,16 @@
   border-right: 1px solid #e0e0e0;
   box-shadow: 4px 0 4px -4px rgba(0, 0, 0, 0.2);
 }
-
+.example-container {
+  display: block;
+  max-height: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
 table {
-  width: 100%;
-  max-height: 500px;
-  overflow: auto;
+  // width: 100%;
+  // max-height: 500px;
+  // overflow: auto;
 }
 // tbody,
 // thead {
@@ -57,4 +65,28 @@ label {
 }
 .mat-column-istrusted {
   padding-left: 10px;
+}
+
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
