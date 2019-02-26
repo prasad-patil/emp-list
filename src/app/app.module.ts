@@ -6,16 +6,22 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { EmployeeService } from './services/employee.service';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
+import { AssignTransporterComponent } from './components/assign-transporter/assign-transporter.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeListComponent, SideNavbarComponent],
+  declarations: [
+    AppComponent,
+    EmployeeListComponent,
+    SideNavbarComponent,
+    AssignTransporterComponent
+  ],
   imports: [
     BrowserAnimationsModule,
     CustomMatModuleModule,

@@ -11,7 +11,9 @@ import {
   MatToolbarModule,
   MatMenuModule,
   MatButtonModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRadioModule,
+  MatChipsModule
 } from '@angular/material';
 
 @NgModule({
@@ -28,7 +30,9 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatChipsModule
   ],
   exports: [
     MatTableModule,
@@ -41,7 +45,9 @@ import {
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    MatChipsModule
   ]
 })
 export class CustomMatModuleModule {}
