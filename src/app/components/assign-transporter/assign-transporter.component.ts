@@ -14,6 +14,33 @@ export class AssignTransporterComponent implements OnInit {
   dataSource: MatTableDataSource<PeriodicElement>;
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+  data = [
+    1212454,
+    1212454,
+    1212454,
+    1212113,
+    1212454,
+    1212454,
+    1212454,
+    1212454,
+    1212454,
+    1212454,
+    1212454,
+    1212454,
+    1212454,
+    1321231,
+    1321231,
+    1321231,
+    1321231,
+    1321231,
+    1321231,
+    1321231,
+    1321231,
+    2123121,
+    1321231
+  ];
+
+  showAllChips = false;
   constructor() {
     this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   }
@@ -42,6 +69,13 @@ export class AssignTransporterComponent implements OnInit {
     e.stopPropagation();
     this.selection.clear();
     this.selection.select(row);
+  }
+
+  getOrderIds() {
+    if (!this.showAllChips) {
+      return this.data.slice(0, 6);
+    }
+    return this.data;
   }
 }
 
