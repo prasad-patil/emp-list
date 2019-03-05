@@ -5,11 +5,15 @@ import {
   MatTableDataSource,
   MatPaginator,
   MatSort,
-  MatIconRegistry
+  MatIconRegistry,
+  MatDialogRef,
+  MatDialog,
+  DialogPosition
 } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OrderInfoPopupComponent } from '../order-info-popup/order-info-popup.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -78,7 +82,8 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private empService: EmployeeService,
     iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer
+    sanitizer: DomSanitizer,
+    public dialog: MatDialog
   ) {
     iconRegistry.addSvgIcon(
       'remove_red_eye',
@@ -213,6 +218,24 @@ export class EmployeeListComponent implements OnInit {
     e.value = '';
     this.filteredValues['deliveryDate'] = '';
     this.dataSource.filter = JSON.stringify(this.filteredValues);
+  }
+  openDialog(event): void {
+    const dialogPosition: DialogPosition = {
+      right: '0'
+    };
+
+    const dialogRef = this.dialog.open(OrderInfoPopupComponent, {
+      width: '350px',
+      height: '100%',
+      maxHeight: '100%',
+      position: dialogPosition,
+      panelClass: 'myapp-no-padding-dialog',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
 

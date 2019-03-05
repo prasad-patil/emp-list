@@ -26,7 +26,7 @@
       <ng-container matColumnDef="info" sticky>
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row" >
-          <mat-icon svgIcon="remove_red_eye"></mat-icon>
+          <mat-icon svgIcon="remove_red_eye" (click)="openDialog($event)"></mat-icon>
         </td>
       </ng-container>
 

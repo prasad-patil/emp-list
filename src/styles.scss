@@ -36,3 +36,8 @@ mat-cell.mat-cell, mat-header-cell.mat-header-cell {
   overflow: visible;
   padding-top: 10px;
 }
+
+// padding
+.myapp-no-padding-dialog .mat-dialog-container {
+  padding: 0;
+}

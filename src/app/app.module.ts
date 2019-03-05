@@ -14,13 +14,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { AssignTransporterComponent } from './components/assign-transporter/assign-transporter.component';
+import { OrderInfoPopupComponent } from './components/order-info-popup/order-info-popup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeListComponent,
     SideNavbarComponent,
-    AssignTransporterComponent
+    AssignTransporterComponent,
+    OrderInfoPopupComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -33,6 +35,7 @@ import { AssignTransporterComponent } from './components/assign-transporter/assi
     NgbModule,
     NgScrollbarModule
   ],
+  entryComponents: [OrderInfoPopupComponent],
   providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
