@@ -1,4 +1,60 @@
 .header {
   height: 50px;
   background-color: blue;
+  display: flex;
+}
+.close-div {
+  height: 100%;
+  width: 51px;
+  margin-left: -45px;
+  position: absolute;
+  background-color: blue;
+  height: 50px;
+  border-radius: 7px;
+}
+.close-div mat-icon {
+  height: 30px;
+  width: 30px;
+  fill: white;
+  margin: 3;
+  margin: 10px 5px;
+}
+.header-details {
+  margin: 10px 13px;
+  font-size: 20px;
+  color: white;
+}
+.fro-row {
+  padding: 20px 0;
+}
+.fro-text {
+  font-size: 22px;
+  font-weight: 600;
+}
+.subtitle {
+  margin: 0 10px;
+  background-color: #e2e2e2;
+  border-radius: 2px;
+  padding: 5px;
+}
+.subcontent {
+  margin: 10px 25px;
+  display: table;
+}
+
+.label-row {
+  display: table-row;
+}
+
+.label-info {
+  display: table-cell;
+  padding: 3px 10px;
+}
+.label-header {
+  display: table-cell;
+  padding: 3px 10px;
+  font-weight: 500;
+}
+.content-body {
+  display: table-row-group;
 }

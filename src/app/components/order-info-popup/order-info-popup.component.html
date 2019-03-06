@@ -1,13 +1,38 @@
-<div mat-dialog-title class="header">
-  <mat-icon svgIcon="highlight_off"></mat-icon>
+<div mat-dialog-title>
+  <div class="header">
+    <div (click)="onNoClick()" class="close-div">
+      <mat-icon svgIcon="highlight_off"></mat-icon>
+    </div>
+    <div class="header-details">More Details</div>
+  </div>
 </div>
 <div mat-dialog-content>
-  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sunt illo accusamus quas fuga in porro molestiae harum totam atque, quibusdam doloremque. Soluta eaque fugiat similique eligendi eum odit sequi nam?</p>
-  <mat-form-field>
-    <input matInput >
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button  cdkFocusInitial>Ok</button>
+  <div class="container">
+    <div class="fro-row">
+      <span class="fro-text">FRO: {{ data.fro }}</span>
+    </div>
+  </div>
+  <div class="goods-info">
+    <div class="subtitle">Non Dangerous Goods</div>
+    <div class="subcontent">
+      <div class="content-body">
+        <div class="label-row">
+          <div class="label-header">Service Type:</div>
+          <div class="label-info">Ocean FCM Import</div>
+        </div>
+        <div class="label-row">
+          <div class="label-header">Created By:</div>
+          <div class="label-info">147852369</div>
+        </div>
+        <div class="label-row">
+          <div class="label-header">UTN:</div>
+          <div class="label-info">121313223</div>
+        </div>
+        <div class="label-row">
+          <div class="label-header">Container No:</div>
+          <div class="label-info">MSCU 147822</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

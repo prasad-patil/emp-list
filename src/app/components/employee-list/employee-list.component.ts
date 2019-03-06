@@ -230,7 +230,10 @@ export class EmployeeListComponent implements OnInit {
       maxHeight: '100%',
       position: dialogPosition,
       panelClass: 'myapp-no-padding-dialog',
-      data: {}
+      disableClose: true,
+      data: {
+        fro: '123464'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
