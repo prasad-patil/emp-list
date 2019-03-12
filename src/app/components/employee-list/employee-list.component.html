@@ -3,8 +3,8 @@
 </h1>
 <div class="list-wrapper">
   <div class="example-container mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="select" sticky>
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+      <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox
             (change)="$event ? masterToggle() : null"
@@ -23,19 +23,24 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="info" sticky>
+      <ng-container matColumnDef="info">
         <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let row" >
-          <mat-icon svgIcon="remove_red_eye" (click)="openDialog($event)"></mat-icon>
+        <td mat-cell *matCellDef="let row">
+          <mat-icon
+            svgIcon="remove_red_eye"
+            (click)="openDialog($event)"
+          ></mat-icon>
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="id" sticky>
+      <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">{{ row.id }}</td>
+        <td mat-cell *matCellDef="let row" (click)="$event.stopPropagation()">
+          {{ row.id }}
+        </td>
       </ng-container>
 
-      <ng-container matColumnDef="uid" sticky>
+      <ng-container matColumnDef="uid">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>UID</th>
         <td mat-cell *matCellDef="let row">{{ row.uid }}</td>
       </ng-container>
@@ -55,6 +60,63 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
         <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="orders">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Orders</th>
+        <td mat-cell *matCellDef="let row">
+          {{ row.orders.length }}
+          <span
+            (click)="
+              expandedElement = expandedElement === row ? null : row;
+              toggleExpandRow(row)
+            "
+          >
+            <mat-icon
+              svgIcon="remove"
+              *ngIf="expandedElement && expandedElement === row; else addIcon"
+            ></mat-icon>
+            <ng-template #addIcon
+              ><mat-icon svgIcon="add"></mat-icon
+            ></ng-template>
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="orderTableColumns.length"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="
+              element == expandedElement ? 'expanded' : 'collapsed'
+            "
+          >
+            <table mat-table [dataSource]="orderTabledataSource" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="fro">
+                <th mat-header-cell *matHeaderCellDef>Fro</th>
+                <td mat-cell *matCellDef="let element">{{ element.fro }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="deliveryAddr">
+                <th mat-header-cell *matHeaderCellDef>Delivery Address</th>
+                <td mat-cell *matCellDef="let element">{{ element.deliveryAddr }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="pickAddr">
+                <th mat-header-cell *matHeaderCellDef>Delivery Address</th>
+                <td mat-cell *matCellDef="let element">{{ element.pickAddr }}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="orderTableColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: orderTableColumns"></tr>
+            </table>
+          </div>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
@@ -117,15 +179,15 @@
         <td mat-cell *matCellDef="let row">{{ row.hobby }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="select-subheader" sticky>
+      <ng-container matColumnDef="select-subheader">
         <th mat-header-cell *matHeaderCellDef></th>
       </ng-container>
 
-      <ng-container matColumnDef="info-subheader" sticky>
+      <ng-container matColumnDef="info-subheader">
         <th mat-header-cell *matHeaderCellDef></th>
       </ng-container>
 
-      <ng-container matColumnDef="id-subheader" sticky>
+      <ng-container matColumnDef="id-subheader">
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <mat-form-field class="header-filter">
@@ -137,7 +199,7 @@
         </th>
       </ng-container>
 
-      <ng-container matColumnDef="uid-subheader" sticky>
+      <ng-container matColumnDef="uid-subheader">
         <th mat-header-cell *matHeaderCellDef>
           <div>
             <mat-form-field class="header-filter">
@@ -153,6 +215,10 @@
       </ng-container>
 
       <ng-container matColumnDef="name-subheader">
+        <th mat-header-cell *matHeaderCellDef></th>
+      </ng-container>
+
+      <ng-container matColumnDef="orders-subheader">
         <th mat-header-cell *matHeaderCellDef></th>
       </ng-container>
 
@@ -264,6 +330,7 @@
           'uid-subheader',
           'istrusted-subheader',
           'name-subheader',
+          'orders-subheader',
           'lastName-subheader',
           'position-subheader',
           'office-subheader',
@@ -281,7 +348,16 @@
       <tr
         mat-row
         *matRowDef="let row; columns: displayedColumns"
-        (click)="selection.toggle(row)"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === row"
+      >
+        >
+      </tr>
+
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="example-detail-row"
       ></tr>
     </table>
   </div>

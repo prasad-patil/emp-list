@@ -1,6 +1,6 @@
 import { EmployeeService } from './../../services/employee.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Employee } from 'src/app/models/employee';
+import { Employee, Order } from 'src/app/models/employee';
 import {
   MatTableDataSource,
   MatPaginator,
@@ -14,11 +14,31 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { OrderInfoPopupComponent } from '../order-info-popup/order-info-popup.component';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from '@angular/animations';
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.scss']
+  styleUrls: ['./employee-list.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state(
+        'collapsed',
+        style({ height: '0px', minHeight: '0', display: 'none' })
+      ),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      )
+    ])
+  ]
 })
 export class EmployeeListComponent implements OnInit {
   displayedColumns: string[] = [
@@ -27,6 +47,7 @@ export class EmployeeListComponent implements OnInit {
     'id',
     'uid',
     'istrusted',
+    'orders',
     'name',
     'lastName',
     'position',
@@ -79,6 +100,10 @@ export class EmployeeListComponent implements OnInit {
     { value: 'tennis', viewValue: 'Tennis' }
   ];
 
+  orderTableColumns: string[] = ['fro', 'deliveryAddr', 'pickAddr'];
+  orderTabledataSource: MatTableDataSource<Order>;
+  expandedElement: any | null;
+
   constructor(
     private empService: EmployeeService,
     iconRegistry: MatIconRegistry,
@@ -113,6 +138,18 @@ export class EmployeeListComponent implements OnInit {
       'cancel',
       sanitizer.bypassSecurityTrustResourceUrl(
         'assets/svgs/baseline-cancel-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'add',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svgs/baseline-add_circle_outline-24px.svg'
+      )
+    );
+    iconRegistry.addSvgIcon(
+      'remove',
+      sanitizer.bypassSecurityTrustResourceUrl(
+        'assets/svgs/baseline-remove_circle_outline-24px.svg'
       )
     );
   }
@@ -239,6 +276,9 @@ export class EmployeeListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+  toggleExpandRow(row) {
+    this.orderTabledataSource = new MatTableDataSource(row.orders);
   }
 }
 

@@ -13,4 +13,11 @@ export class Employee {
   istrusted: boolean;
   favBook: string;
   hobby: string;
+  orders: any[];
+}
+
+export class Order {
+  fro: string;
+  pickUpAddress: string;
+  deliveryAddress: string;
 }
